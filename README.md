@@ -1,4 +1,4 @@
-# Project Panit(Ki thuat do hoa Co Thao)
+# Project Paint(Ki thuat do hoa Co Thao)
 
 ## Getting Started
 
