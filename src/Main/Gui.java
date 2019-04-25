@@ -8,6 +8,7 @@ package Main;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Image;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 /**
@@ -15,10 +16,13 @@ import javax.swing.ImageIcon;
  * @author totha
  */
 public class Gui extends javax.swing.JFrame {
-
+     public static ArrayList<Paint> paint2D = new ArrayList<Paint>();
+     public static ArrayList<Paint> paint3D = new ArrayList<Paint>();
+     public static boolean Draw3d = false;
     /**
      * Creates new form Gui
      */
+   
     public Gui() {
         initComponents();
         setSize(1230,730);
@@ -28,7 +32,9 @@ public class Gui extends javax.swing.JFrame {
         pnlContent.setLayout(new BorderLayout(0, 0));
         pnlContent.setBackground(Color.white);
         setContentPane(pnlContent);
-        //button
+        //paint
+        pnlOxy.add(new Paint_2D(),BorderLayout.CENTER);
+      
        
        
     }
@@ -53,6 +59,7 @@ public class Gui extends javax.swing.JFrame {
         pnlInformation = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        pnlOxy = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -88,6 +95,11 @@ public class Gui extends javax.swing.JFrame {
         btnCube.setEnabled(false);
 
         btnClear.setIcon(new javax.swing.ImageIcon("D:\\Java\\KyThuatDoHoa\\Image\\clear.png")); // NOI18N
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlControlLayout = new javax.swing.GroupLayout(pnlControl);
         pnlControl.setLayout(pnlControlLayout);
@@ -106,7 +118,7 @@ public class Gui extends javax.swing.JFrame {
                 .addComponent(btnCube, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(320, Short.MAX_VALUE))
         );
         pnlControlLayout.setVerticalGroup(
             pnlControlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -151,16 +163,31 @@ public class Gui extends javax.swing.JFrame {
                 .addGap(0, 518, Short.MAX_VALUE))
         );
 
+        pnlOxy.setBackground(new java.awt.Color(255, 255, 255));
+        pnlOxy.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+
+        javax.swing.GroupLayout pnlOxyLayout = new javax.swing.GroupLayout(pnlOxy);
+        pnlOxy.setLayout(pnlOxyLayout);
+        pnlOxyLayout.setHorizontalGroup(
+            pnlOxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        pnlOxyLayout.setVerticalGroup(
+            pnlOxyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout pnlContentLayout = new javax.swing.GroupLayout(pnlContent);
         pnlContent.setLayout(pnlContentLayout);
         pnlContentLayout.setHorizontalGroup(
             pnlContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlContentLayout.createSequentialGroup()
-                .addComponent(pnlInformation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1013, Short.MAX_VALUE))
-            .addGroup(pnlContentLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(pnlControl, javax.swing.GroupLayout.DEFAULT_SIZE, 1203, Short.MAX_VALUE)
+                .addGroup(pnlContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlContentLayout.createSequentialGroup()
+                        .addComponent(pnlInformation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(pnlOxy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pnlControl, javax.swing.GroupLayout.DEFAULT_SIZE, 1205, Short.MAX_VALUE))
                 .addContainerGap())
         );
         pnlContentLayout.setVerticalGroup(
@@ -169,7 +196,9 @@ public class Gui extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(pnlControl, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlInformation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlContentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(pnlInformation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(pnlOxy, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -213,6 +242,7 @@ public class Gui extends javax.swing.JFrame {
         i++;
         if(i%2==0){
                 btnSwitch.setIcon(new ImageIcon("Image/3D.png"));
+                Draw3d = false;
                 btnBall.setEnabled(true);
                 btnStar.setEnabled(true);
                 btnPyramit.setEnabled(false);
@@ -220,16 +250,28 @@ public class Gui extends javax.swing.JFrame {
                 
         }else{
                 btnSwitch.setIcon(new ImageIcon("Image/2D.png"));
+                Draw3d = true;
                 btnBall.setEnabled(false);
                 btnStar.setEnabled(false);
                 btnPyramit.setEnabled(true);
                 btnCube.setEnabled(true);
         }
+         repaint();
+         validate();
     }//GEN-LAST:event_btnSwitchActionPerformed
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        // TODO add your handling code here:
+        paint2D.clear();
+        paint3D.clear();
+        repaint();
+    }//GEN-LAST:event_btnClearActionPerformed
 
     /**
      * @param args the command line arguments
      */
+    
+   
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -282,5 +324,10 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JPanel pnlContent;
     private javax.swing.JPanel pnlControl;
     private javax.swing.JPanel pnlInformation;
+    private javax.swing.JPanel pnlOxy;
     // End of variables declaration//GEN-END:variables
+
+  
+
+
 }
