@@ -175,6 +175,9 @@
                   <Dimension value="[85, 60]"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStarActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnBall">
               <Properties>
@@ -182,6 +185,9 @@
                   <Image iconType="2" name="D:\Java\KyThuatDoHoa\Image\ball.png"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBallActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnPyramit">
               <Properties>
@@ -230,10 +236,21 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel1" alignment="0" max="32767" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="74" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="row1" max="32767" attributes="0"/>
+                          <Component id="row2" alignment="0" max="32767" attributes="0"/>
+                          <Component id="row4" alignment="0" max="32767" attributes="0"/>
+                          <Component id="row5" alignment="0" max="32767" attributes="0"/>
+                          <Component id="row3" alignment="0" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -244,7 +261,17 @@
                       <Component id="jLabel1" min="-2" pref="27" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="518" max="32767" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="row1" min="-2" pref="27" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="row2" min="-2" pref="27" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
+                      <Component id="row3" min="-2" pref="27" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="row4" min="-2" pref="27" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="row5" min="-2" pref="27" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="326" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -263,6 +290,16 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Loading..."/>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="row1">
+            </Component>
+            <Component class="javax.swing.JLabel" name="row2">
+            </Component>
+            <Component class="javax.swing.JLabel" name="row4">
+            </Component>
+            <Component class="javax.swing.JLabel" name="row5">
+            </Component>
+            <Component class="javax.swing.JLabel" name="row3">
             </Component>
           </SubComponents>
         </Container>

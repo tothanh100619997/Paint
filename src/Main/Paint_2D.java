@@ -14,8 +14,11 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.util.Timer;
+import java.util.TimerTask;
 import javax.swing.JComponent;
 
 
@@ -25,21 +28,61 @@ import javax.swing.JComponent;
  * @author totha
  */
 
-@SuppressWarnings("serial")
+
 public class Paint_2D extends JComponent{
-    public Point startDrag, endDrag;
-    public Paint ptemp;
-    private  Point mouseCoords = null;
-    private  Cursor brush;
    
+    public Point startDrag, endDrag;
+    public Paint ptemp=null;
+    private  Point mouseCoords = null;
+    private final  Cursor brush;
+    private static javax.swing.Timer t; 
+    public static int i=0;
+    
     public Paint_2D(){
        
         setSize(990,580);
         Toolkit toolkit = java.awt.Toolkit.getDefaultToolkit();        
         Image brushCursor = toolkit.getImage("D:\\Java\\KyThuatDoHoa\\Image\\brushCursor.png");
         this.brush = toolkit.createCustomCursor(brushCursor, new Point(0, 0), "");
+        
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                Point a =new Point(50,changeY(50));
+                Point b =new Point(-50,changeY(-50));
+                MyStar obj = new MyStar();                
+                obj.makeObject(a, b); 
+                Gui.paint2D.add(obj) ;
+                Paint pt = Gui.paint2D.get(0);
+                ptemp=pt;
+                MyStar r = (MyStar) ptemp;
+                
+                Timer timer = new Timer();
+                timer.scheduleAtFixedRate(new TimerTask() {
+                @Override
+                public void run() { 
+                    i=i+1;
+                    if(ptemp!=null){
+                     ptemp.rotate(20);                     
+                     ptemp.move(new Point(0,0), new Point(1,changeY(0)));
+                     
+                     Gui.flag= new Point(i,0);
+//                        System.out.println(r.getA()+"-----------"+r.getB());
+                        
+                };         
+                            
+                    
+               }
+              }, 1000, 100);
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                
+            }
+        });
         this.addMouseMotionListener(new MouseMotionAdapter() {
-             int i=0;
+            
             @Override
             public void mouseDragged(MouseEvent e) {
                 
@@ -53,19 +96,22 @@ public class Paint_2D extends JComponent{
             public void mouseMoved(MouseEvent e) {          
                 
                 mouseCoords = new Point(e.getX(), e.getY());
-                System.out.println(mouseCoords);
+                
                 repaint();
             }
 
         });
+        
         
         //setBackground(Color.RED);
         //setVisible(true);
     }
     
     @Override
+   
     public void paint(Graphics g){
-         setCursor(brush);
+        
+        setCursor(brush);
         Graphics2D g2d = (Graphics2D) g;       
         g2d.translate(494.0, 290.0);//
         g2d.scale(1, 1);
@@ -73,12 +119,37 @@ public class Paint_2D extends JComponent{
          GraphicAdapter g2 = new GraphicAdapter() {
         };
         g2.setGraphicAdapter(g);
-        Point p1, p2, p3, p4;
+         Point p1, p2, p3, p4;
         if (Gui.Draw3d == false) {
             Khung2D(g);
         } else {
             //Khung3D(g);
         }
+        
+         
+        /////////////////////////////////////////////////////
+       
+          if ("star".equals(Gui.selectButton)) {
+                
+//                if(ptemp!=null){
+//                     ptemp.rotate(2);
+//                };         
+//               
+////                Timer timer = new Timer();
+////                timer.scheduleAtFixedRate(new TimerTask() {
+////                @Override
+////                public void run() { 
+////                    if((Gui.paint2D.size()>=0)){
+////                         
+////                    }//                   
+////                    
+////                }
+////              }, 1000, 10000);
+                
+              repaint();   
+              
+              
+            } 
     }
     public void Khung2D(Graphics g) {
       
@@ -131,6 +202,8 @@ public class Paint_2D extends JComponent{
            if(mouseCoords.x>494 && mouseCoords.y>290){                                    // 1 1 494 -290
              g.drawString(" (" + (mouseCoords.x-494) + "," + (mouseCoords.y*-1+290) + ")", mouseCoords.x-494+30, mouseCoords.y-290+30);
             }
+          
+           
             
           
             
@@ -139,5 +212,7 @@ public class Paint_2D extends JComponent{
             //g.drawString("x = " + mouseCoords.x + "," + " y = " + mouseCoords.y, 10, 30);
         
     }
-  
+    int changeY(int y){
+        return -y;
+    }
 }

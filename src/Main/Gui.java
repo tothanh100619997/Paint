@@ -7,9 +7,14 @@ package Main;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Point;
+import java.awt.geom.AffineTransform;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  *
@@ -19,6 +24,14 @@ public class Gui extends javax.swing.JFrame {
      public static ArrayList<Paint> paint2D = new ArrayList<Paint>();
      public static ArrayList<Paint> paint3D = new ArrayList<Paint>();
      public static boolean Draw3d = false;
+     public static String selectButton ="";
+     public static Color selectColor = Color.black;
+     public static int X;
+     public static int Y;
+     public static int Z;
+     public static  Point flag = new Point(0,0);
+     public javax.swing.JPanel pnlInfomation;
+
     /**
      * Creates new form Gui
      */
@@ -34,7 +47,23 @@ public class Gui extends javax.swing.JFrame {
         setContentPane(pnlContent);
         //paint
         pnlOxy.add(new Paint_2D(),BorderLayout.CENTER);
-      
+        
+        Timer timer = new Timer();
+                timer.scheduleAtFixedRate(new TimerTask() {
+                @Override
+                public void run() {  
+                    if(paint2D.size()>0){
+                        Paint pt = paint2D.get(0);
+                        MyStar r = (MyStar) pt;
+                        row1.setText(r.getA().toString());
+                         row2.setText(r.getB().toString());
+                        
+                         
+                    }
+                    
+                 
+                }
+              }, 1000, 10);
        
        
     }
@@ -59,6 +88,11 @@ public class Gui extends javax.swing.JFrame {
         pnlInformation = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        row1 = new javax.swing.JLabel();
+        row2 = new javax.swing.JLabel();
+        row4 = new javax.swing.JLabel();
+        row5 = new javax.swing.JLabel();
+        row3 = new javax.swing.JLabel();
         pnlOxy = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -85,8 +119,18 @@ public class Gui extends javax.swing.JFrame {
 
         btnStar.setIcon(new javax.swing.ImageIcon("D:\\Java\\KyThuatDoHoa\\Image\\star.png")); // NOI18N
         btnStar.setPreferredSize(new java.awt.Dimension(85, 60));
+        btnStar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStarActionPerformed(evt);
+            }
+        });
 
         btnBall.setIcon(new javax.swing.ImageIcon("D:\\Java\\KyThuatDoHoa\\Image\\ball.png")); // NOI18N
+        btnBall.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBallActionPerformed(evt);
+            }
+        });
 
         btnPyramit.setIcon(new javax.swing.ImageIcon("D:\\Java\\KyThuatDoHoa\\Image\\pyramid.png")); // NOI18N
         btnPyramit.setEnabled(false);
@@ -152,6 +196,15 @@ public class Gui extends javax.swing.JFrame {
                 .addGap(73, 73, 73)
                 .addComponent(jLabel2)
                 .addContainerGap(74, Short.MAX_VALUE))
+            .addGroup(pnlInformationLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(row1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(row2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(row4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(row5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(row3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         pnlInformationLayout.setVerticalGroup(
             pnlInformationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,7 +213,17 @@ public class Gui extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addGap(0, 518, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(row1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(row2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
+                .addComponent(row3, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(row4, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(row5, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 326, Short.MAX_VALUE))
         );
 
         pnlOxy.setBackground(new java.awt.Color(255, 255, 255));
@@ -238,7 +301,8 @@ public class Gui extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu2MouseClicked
     int i=0;
     private void btnSwitchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSwitchActionPerformed
-        // TODO add your handling code here:
+                // TODO add your handling code here:
+        selectButton="switch";        
         i++;
         if(i%2==0){
                 btnSwitch.setIcon(new ImageIcon("Image/3D.png"));
@@ -262,10 +326,23 @@ public class Gui extends javax.swing.JFrame {
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         // TODO add your handling code here:
+        selectButton="clear";  
         paint2D.clear();
         paint3D.clear();
         repaint();
     }//GEN-LAST:event_btnClearActionPerformed
+
+    private void btnStarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStarActionPerformed
+        // TODO add your handling code here:
+          
+          selectButton="star";  
+          
+    }//GEN-LAST:event_btnStarActionPerformed
+
+    private void btnBallActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBallActionPerformed
+        // TODO add your handling code here:
+        selectButton="ball";
+    }//GEN-LAST:event_btnBallActionPerformed
 
     /**
      * @param args the command line arguments
@@ -273,11 +350,14 @@ public class Gui extends javax.swing.JFrame {
     
    
     public static void main(String args[]) {
+        
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
+        
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -285,23 +365,16 @@ public class Gui extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Gui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Gui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Gui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Gui.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+         //</editor-fold>
+         
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Gui().setVisible(true);
-                
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Gui().setVisible(true);
         });
     }
 
@@ -325,9 +398,68 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JPanel pnlControl;
     private javax.swing.JPanel pnlInformation;
     private javax.swing.JPanel pnlOxy;
+    private javax.swing.JLabel row1;
+    private javax.swing.JLabel row2;
+    private javax.swing.JLabel row3;
+    private javax.swing.JLabel row4;
+    private javax.swing.JLabel row5;
     // End of variables declaration//GEN-END:variables
+  public static Point convertMtoND(int x, int y) {
+        Point temp = new Point();
+        temp.x = x - 560;
+        temp.y = (y - 300) * (-1);
 
-  
+        return temp;
+    }
+
+    public static Point convertNDtoM(int x, int y) {
+        Point temp = new Point();
+        temp.x = x + 560;
+        temp.y = y * (-1) + 300;
+
+        return temp;
+    }
+
+    public static float angleBetween2Lines(Point p1, Point p2) {
+        float angle1 = (float) Math.atan2(290 - p1.y, p1.x - 494);
+        float angle2 = (float) Math.atan2(290 - p2.y, p2.x - 494);
+        float calculatedAngle = (float) Math.toDegrees(angle1 - angle2);
+        if (calculatedAngle < 0) {
+            calculatedAngle += 360;
+        }
+        return calculatedAngle;
+    }
+
+    public static Point rotateAround(Point p, float angle) {
+        Point p2 = new Point();
+
+        AffineTransform rotation = new AffineTransform();
+        double angleInRadians = (angle * Math.PI / 180);
+        rotation.rotate(angleInRadians, flag.x,flag.y );
+        rotation.transform(p, p2);
+
+        return p2;
+    }
+
+    public static void Ve4Diem(Graphics g, int xc, int yc, int x, int y, float a) {
+        Point p1 = new Point(xc + x, yc + y);
+        Point p2 = new Point(xc - x, yc + y);
+        Point p3 = new Point(xc - x, yc - y);
+        Point p4 = new Point(xc + x, yc - y);
+        
+        p1 = rotateAround(p1, a);
+        p2 = rotateAround(p2, a);
+        p3 = rotateAround(p3, a);
+        p4 = rotateAround(p4, a);
+        
+        g.fillRect(p1.x, p1.y, 1, 1);
+        g.fillRect(p2.x, p2.y, 1, 1);
+        g.fillRect(p3.x, p3.y, 1, 1);
+        g.fillRect(p4.x, p4.y, 1, 1);
+    }
+  public static double areaTriangle(Point A, Point B, Point C) {
+		return Math.abs(A.x * (B.y - C.y) + B.x * (C.y - A.y) + C.x * (A.y - B.y));
+	}
 
 
 }

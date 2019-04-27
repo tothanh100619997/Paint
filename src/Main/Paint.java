@@ -10,7 +10,7 @@ package Main;
  * @author totha
  */
 import java.awt.Point;
-import java.io.BufferedWriter;
+
 
 
 public interface Paint {
@@ -18,8 +18,7 @@ public interface Paint {
 	public boolean contains(Point p);	//Kiem tra diem co thuoc doi tuong
 	public void move(Point startDrag, Point endDrag);	//Ham di chuyen doi tuong
         public void scale(Point startDrag,Point endDrag);//dieu chinh doi tuong
-	public void rotate(Point startDrag, Point endDrag);     
-        public void writetoFile(BufferedWriter b);	//Ghi cac gia tri doi tuong ra file text
+	public void rotate(float a);             
 	public void makeObject(Point startDrag, Point endDrag);	//Tao doi tuong
         
 }
