@@ -83,9 +83,22 @@ public class Gui extends javax.swing.JFrame {
                               row2.setText("Tọa độ Tâm: "+"("+0+" , "+0 +" , "+ 0+ ")");
                               row3.setText("Tọa độ X: "+"("+p.getDt1().getB().x+" , "+0 +" , "+0 + ")");
                            
-                            row4.setText("Tọa độ Y: "+"("+0+" , "+p.getDt5().getB().y +" , "+ 0+ ")");
-                            row5.setText("Tọa độ Z: "+"("+0+" , "+0 +" , "+ p.getDt4().getB().y*-1+ ")");
-                       
+                              row4.setText("Tọa độ Y: "+"("+0+" , "+p.getDt5().getB().y +" , "+ 0+ ")");
+                              row5.setText("Tọa độ Z: "+"("+0+" , "+0 +" , "+ p.getDt4().getB().y*-1+ ")");
+                              selectButton="";
+                        }
+                        
+                        if("Pyramid".equals(selectButton)){
+                            
+                              Paint pt = paint3D.get(0);                     
+                              MyPyramid p = (MyPyramid) pt;
+                              row1.setText("Hinh Chop "); 
+                              row2.setText("Tọa độ Tâm: "+"("+0+" , "+0 +" , "+ 0+ ")");
+                              row3.setText("Tọa độ X: "+"("+p.getDt1().getB().x+" , "+0 +" , "+0 + ")");
+                           
+                              row4.setText("Tọa độ Y: "+"("+0+" , "+p.getDt2().getA().y +" , "+ 0+ ")");
+                              row5.setText("Tọa độ Đỉnh: "+"("+p.getDt5().getA().x+" , "+p.getDt5().getA().y +" , "+ p.getDt5().getB().y*(-1)+ ")");
+                              selectButton="";
                         }
                     }
                  
