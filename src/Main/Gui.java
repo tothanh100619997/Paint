@@ -29,7 +29,8 @@ public class Gui extends javax.swing.JFrame {
      public static int X;
      public static int Y;
      public static int Z;
-     public static  Point flag = new Point(0,0);
+     public static float vanToc =0;
+     public static  Point flag = new Point(-469,0);
      public javax.swing.JPanel pnlInfomation;
 
     /**
@@ -52,11 +53,26 @@ public class Gui extends javax.swing.JFrame {
                 timer.scheduleAtFixedRate(new TimerTask() {
                 @Override
                 public void run() {  
+                  
                     if(paint2D.size()>0){
+                        
+                        if("star".equals(selectButton)){
                         Paint pt = paint2D.get(0);
                         MyStar r = (MyStar) pt;
-                        row1.setText(r.getA().toString());
-                         row2.setText(r.getB().toString());
+                         row1.setText("Rolling Ball Star");
+                         row2.setText("Tọa độ tâm: "+"("+(r.getA().x+r.getB().x)*0.5+" , "+(r.getA().y+r.getB().y)*0.5 +")");
+                         row3.setText("Bán kính: "+r.getB().y*0.5);
+                         row4.setText("Vận Tốc:"+ 990/9+"px/s");
+                        }
+                        if("ball".equals(selectButton)){
+                            Paint pt = Gui.paint2D.get(0);                     
+                            MyEllip p = (MyEllip) pt;
+                         row1.setText("Drop Ball ");
+                         row2.setText("Tọa độ tâm: "+"("+(p.getA().x+30)+" , "+p.getB().y*(-1)+")");
+                         row3.setText("Bán kính: "+30);
+                         row4.setText("Vận Tốc:"+ vanToc+"px/s");
+                        }
+                        
                         
                          
                     }
@@ -64,7 +80,7 @@ public class Gui extends javax.swing.JFrame {
                  
                 }
               }, 1000, 10);
-       
+             
        
     }
 
@@ -134,9 +150,19 @@ public class Gui extends javax.swing.JFrame {
 
         btnPyramit.setIcon(new javax.swing.ImageIcon("D:\\Java\\KyThuatDoHoa\\Image\\pyramid.png")); // NOI18N
         btnPyramit.setEnabled(false);
+        btnPyramit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPyramitActionPerformed(evt);
+            }
+        });
 
         btnCube.setIcon(new javax.swing.ImageIcon("D:\\Java\\KyThuatDoHoa\\Image\\cube.png")); // NOI18N
         btnCube.setEnabled(false);
+        btnCube.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCubeActionPerformed(evt);
+            }
+        });
 
         btnClear.setIcon(new javax.swing.ImageIcon("D:\\Java\\KyThuatDoHoa\\Image\\clear.png")); // NOI18N
         btnClear.addActionListener(new java.awt.event.ActionListener() {
@@ -186,6 +212,9 @@ public class Gui extends javax.swing.JFrame {
         jLabel1.setText("INFORMATION");
 
         jLabel2.setText("Loading...");
+
+        row1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        row1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout pnlInformationLayout = new javax.swing.GroupLayout(pnlInformation);
         pnlInformation.setLayout(pnlInformationLayout);
@@ -306,6 +335,7 @@ public class Gui extends javax.swing.JFrame {
         i++;
         if(i%2==0){
                 btnSwitch.setIcon(new ImageIcon("Image/3D.png"));
+                paint3D.removeAll(paint3D);
                 Draw3d = false;
                 btnBall.setEnabled(true);
                 btnStar.setEnabled(true);
@@ -313,6 +343,7 @@ public class Gui extends javax.swing.JFrame {
                 btnCube.setEnabled(false);
                 
         }else{
+                paint2D.removeAll(paint2D);
                 btnSwitch.setIcon(new ImageIcon("Image/2D.png"));
                 Draw3d = true;
                 btnBall.setEnabled(false);
@@ -329,7 +360,12 @@ public class Gui extends javax.swing.JFrame {
         selectButton="clear";  
         paint2D.clear();
         paint3D.clear();
-        repaint();
+        row1.setText("");
+        row2.setText("");
+        row3.setText("");
+        row4.setText("");
+        row5.setText("");
+        
     }//GEN-LAST:event_btnClearActionPerformed
 
     private void btnStarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStarActionPerformed
@@ -343,6 +379,17 @@ public class Gui extends javax.swing.JFrame {
         // TODO add your handling code here:
         selectButton="ball";
     }//GEN-LAST:event_btnBallActionPerformed
+
+    private void btnCubeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCubeActionPerformed
+        // TODO add your handling code here:
+        NhapToaDo3D hcn = new NhapToaDo3D("Cube");
+    }//GEN-LAST:event_btnCubeActionPerformed
+
+    private void btnPyramitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPyramitActionPerformed
+        // TODO add your handling code here:
+        
+        NhapToaDo3D ht = new NhapToaDo3D("Pyramid");
+    }//GEN-LAST:event_btnPyramitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -404,31 +451,7 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JLabel row4;
     private javax.swing.JLabel row5;
     // End of variables declaration//GEN-END:variables
-  public static Point convertMtoND(int x, int y) {
-        Point temp = new Point();
-        temp.x = x - 560;
-        temp.y = (y - 300) * (-1);
 
-        return temp;
-    }
-
-    public static Point convertNDtoM(int x, int y) {
-        Point temp = new Point();
-        temp.x = x + 560;
-        temp.y = y * (-1) + 300;
-
-        return temp;
-    }
-
-    public static float angleBetween2Lines(Point p1, Point p2) {
-        float angle1 = (float) Math.atan2(290 - p1.y, p1.x - 494);
-        float angle2 = (float) Math.atan2(290 - p2.y, p2.x - 494);
-        float calculatedAngle = (float) Math.toDegrees(angle1 - angle2);
-        if (calculatedAngle < 0) {
-            calculatedAngle += 360;
-        }
-        return calculatedAngle;
-    }
 
     public static Point rotateAround(Point p, float angle) {
         Point p2 = new Point();

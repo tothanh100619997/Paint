@@ -96,7 +96,7 @@ public class MyStar implements Hinh2D {
 				A = B;
 				B = temp;
 			}
-
+                        
 			int r = (A.x + B.x) / 2 - A.x; // R bán kính
 			int xt = (A.x + B.x) / 2; // xt,yt tọa độ tâm của hình chữ nhật
 			int yt = (A.y + B.y) / 2;
@@ -146,12 +146,9 @@ public class MyStar implements Hinh2D {
 				line.draw(g);
 			
 		}
-		
-//		g.setColor(Color.BLUE);
-//		char [] c = {'A','B','C','D','E'};
-//		for (int i = 0; i < 5; i++) {
-//			g.drawString(String.valueOf(c[i]), point[i].x, point[i].y);
-//		}
+               
+		   
+
 	}
 	@Override
 	public void makeObject(Point start, Point end) {
@@ -160,22 +157,6 @@ public class MyStar implements Hinh2D {
 		this.setSize(size);
 		this.setColor(color);
 	}
-
-//	@Override
-//	public boolean impact(Point p) {
-//		double ABD = Gui.areaTriangle(point[0], point[1], point[3]);
-//		double PAB = Gui.areaTriangle(p, point[0], point[1]);
-//		double PAD = Gui.areaTriangle(p, point[0], point[3]);
-//		double PBD = Gui.areaTriangle(p, point[1], point[3]);
-//		boolean t1 = (PAB + PAD + PBD == ABD);
-//		
-//		double ACE = Gui.areaTriangle(point[0], point[2], point[4]);
-//		double PAC = Gui.areaTriangle(p, point[0], point[2]);
-//		double PAE = Gui.areaTriangle(p, point[0], point[4]);
-//		double PCE = Gui.areaTriangle(p, point[2], point[4]);
-//		boolean t2 = (PAC + PAE + PCE == ACE);
-//		return (t1 || t2);
-//	}
 
 	@Override
 	public void move(Point start, Point end) {

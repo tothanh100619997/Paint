@@ -6,7 +6,6 @@
 package Main;
 
 import java.awt.Point;
-import java.io.BufferedWriter;
 
 /**
  *
@@ -52,18 +51,18 @@ public class MyCube implements Hinh3D{
 
     public void makeCube(int x,int y,int z) {
         y = y/2;
-        setDt1(new MyLine(new Point(400,300),new Point(400,300-z))); //oz
-        setDt2(new MyLine(new Point(400,300-z),new Point(400+x,300-z)));
-        setDt3(new MyLine(new Point(400+x,300-z),new Point(400+x,300)));
-        setDt4(new MyLine(new Point(400,300),new Point(400+x,300))); // ox
-        setDt5(new MyLine(new Point(400-y,300+y),new Point(400,300))); // oy
-        setDt6(new MyLine(new Point(400-y,300+y),new Point(400-y+x,300+y)));
-        setDt7(new MyLine(new Point(400-y+x,300+y),new Point(400+x,300)));
-        setDt8(new MyLine(new Point(400-y,300+y-z),new Point(400-y,300+y)));
-        setDt9(new MyLine(new Point(400-y,300+y-z),new Point(400-y+x,300+y-z)));
-        setDt10(new MyLine(new Point(400-y+x,300+y),new Point(400-y+x,300+y-z)));
-        setDt11(new MyLine(new Point(400-y,300+y-z),new Point(400,300-z)));
-        setDt12(new MyLine(new Point(400-y+x,300+y-z),new Point(400+x,300-z)));   
+        setDt1(new MyLine(new Point(0,0),new Point(0,x))); //ox
+        setDt2(new MyLine(new Point(0,-z),new Point(x,-z)));//AB        
+        setDt3(new MyLine(new Point(x,-z),new Point(x,0)));//BC        
+        setDt4(new MyLine(new Point(0,0),new Point(0,-z))); // oz        
+        setDt5(new MyLine(new Point(0,0),new Point(-y,y))); // oy
+        setDt6(new MyLine(new Point(-y,y),new Point(x-y,y)));//C'D'
+        setDt7(new MyLine(new Point(-y+x,y),new Point(x,0)));//CC'
+        setDt8(new MyLine(new Point(-y,+y-z),new Point(-y,y)));//A'D'
+        setDt9(new MyLine(new Point(-y,+y-z),new Point(-y+x,y-z)));//A'C'
+        setDt10(new MyLine(new Point(-y+x,y),new Point(-y+x,y-z)));//C'B'
+        setDt11(new MyLine(new Point(-y,y-z),new Point(0,-z)));// A'A
+        setDt12(new MyLine(new Point(-y+x,y-z),new Point(x,-z))); //B'B 
         
     }
     

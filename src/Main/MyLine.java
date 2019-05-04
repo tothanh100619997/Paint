@@ -12,8 +12,6 @@ package Main;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
-import java.io.BufferedWriter;
-import java.io.IOException;
 import javafx.scene.shape.Line;
 
 public class MyLine implements Hinh2D {

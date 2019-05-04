@@ -33,13 +33,18 @@ public class Paint_2D extends JComponent{
    
     public Point startDrag, endDrag;
     public Paint ptemp=null;
+    public Paint ptemp1=null;
+    public Paint ptemlBall=null;
     private  Point mouseCoords = null;
     private final  Cursor brush;
     private static javax.swing.Timer t; 
-    public static int i=0;
-    
+    public float angle =20;
+    public int  kc=5;
+    public int _vanToc =0;
+    public int _giaToc  = 1;
+
     public Paint_2D(){
-       
+       // 495 290
         setSize(990,580);
         Toolkit toolkit = java.awt.Toolkit.getDefaultToolkit();        
         Image brushCursor = toolkit.getImage("D:\\Java\\KyThuatDoHoa\\Image\\brushCursor.png");
@@ -48,32 +53,112 @@ public class Paint_2D extends JComponent{
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                Point a =new Point(50,changeY(50));
-                Point b =new Point(-50,changeY(-50));
-                MyStar obj = new MyStar();                
-                obj.makeObject(a, b); 
-                Gui.paint2D.add(obj) ;
-                Paint pt = Gui.paint2D.get(0);
-                ptemp=pt;
-                MyStar r = (MyStar) ptemp;
-                
-                Timer timer = new Timer();
-                timer.scheduleAtFixedRate(new TimerTask() {
-                @Override
-                public void run() { 
-                    i=i+1;
-                    if(ptemp!=null){
-                     ptemp.rotate(20);                     
-                     ptemp.move(new Point(0,0), new Point(1,changeY(0)));
-                     
-                     Gui.flag= new Point(i,0);
-//                        System.out.println(r.getA()+"-----------"+r.getB());
-                        
-                };         
-                            
+                if("star".equals(Gui.selectButton)){                     
+                            Point a =new Point(-494,changeY(50));
+                            Point b =new Point(-444,changeY(-50));
+                            MyStar obj = new MyStar();                
+                            obj.makeObject(a, b); 
+                            Gui.paint2D.add(obj) ;
+                            Paint pt = Gui.paint2D.get(0);
+                            ptemp=pt;
+                            MyStar r = (MyStar) ptemp;
+                            MyCircle dtr = new MyCircle();
+                            dtr.makeObject( a,b);
+                            Gui.paint2D.add(dtr);                
+
+                            Paint pt1 = Gui.paint2D.get(1);
+                            ptemp1 =pt1;
+                            MyRect hcn = new MyRect();
+                            hcn.makeObject(new Point(-490,changeY(-25)), new Point(490,changeY(-27)));
+                            Gui.paint2D.add(hcn);
+
+                            Timer timer = new Timer();
+                            timer.scheduleAtFixedRate(new TimerTask() {
+                            @Override
+                            public void run() { 
+                                 if("clear".equals(Gui.selectButton)){
+                                    timer.cancel();
+                                        angle=20;
+                                        kc=5;
+                                        Gui.flag =new Point(-469,0);
+                                }
+                                if(r.getB().x>495){
+                                    angle=-angle;
+                                    kc=-kc;
+                                }
+                                if(r.getA().x<-495){
+                                     angle=-angle;
+                                    kc=-kc;
+                                }
+
+                                if(ptemp!=null){
+                                 ptemp.rotate(angle);                     
+                                 ptemp.move(new Point(0,0), new Point(kc,changeY(0)));
+                                 ptemp1.move(new Point(0,0), new Point(kc,changeY(0)));
+                                 Gui.flag= new Point((r.getA().x+r.getB().x)/2,0);
+
+
+                            };         
+
+
+                           }
+                          }, 1000, 50);
+                }
+                if("ball".equals(Gui.selectButton)){
+                    MyEllip ball = new MyEllip();
+                    ball.makeObject(new Point(0,changeY(260)), new Point(30,changeY(230)));
+                    Gui.paint2D.add(ball);                    
+                     Paint pt = Gui.paint2D.get(0);
+                     ptemlBall=pt;
+                     MyEllip p = (MyEllip) ptemlBall;
+                    MyRhombus rbs = new MyRhombus();
+                    rbs.makeObject(new Point(0,changeY(-100)), new Point(200,changeY(-200)));
+                    Gui.paint2D.add(rbs);
                     
-               }
-              }, 1000, 100);
+                    MyRect chan1 = new MyRect();
+                    chan1.makeObject(new Point(-200, changeY(-150)), new Point(-198, changeY(-290)));
+                    Gui.paint2D.add(chan1);
+                    
+                    MyRect chan2 = new MyRect();
+                    chan2.makeObject(new Point(0, changeY(-200)), new Point(2, changeY(-290)));
+                    Gui.paint2D.add(chan2);
+                    
+                    MyRect chan3 = new MyRect();
+                    chan3.makeObject(new Point(200, changeY(-150)), new Point(202, changeY(-290)));
+                    Gui.paint2D.add(chan3);
+                    
+                    MyLine dt1 = new MyLine();
+                    dt1.makeObject( new Point(-200,changeY(-160)), new Point(0,changeY(-210)));
+                    Gui.paint2D.add(dt1);
+                    
+                    MyLine dt2 = new MyLine();
+                    dt2.makeObject( new Point(0,changeY(-210)), new Point(200,changeY(-160)));
+                    Gui.paint2D.add(dt2);
+                    
+                     Timer timer = new Timer();
+                            timer.scheduleAtFixedRate(new TimerTask() {
+                            @Override
+                            public void run() { 
+                                if("clear".equals(Gui.selectButton)){
+                                    timer.cancel();
+                                    _vanToc=0;
+                                    _giaToc=1;
+                                }
+                                if(ptemlBall!=null){
+                                    _vanToc +=_giaToc;//9,8 m/s^2
+                                    Gui.vanToc=_vanToc;
+                                    if(p.getB().y>100){
+                                        _vanToc=(int) (-(int)_vanToc*0.9);
+                                    }
+                                  
+                                   ptemlBall.move(new Point(0,0), new Point(0, (int) changeY(-_vanToc)));
+                                }
+                            };         
+
+                          }, 1000, 50);
+
+                }
+               
             }
 
             @Override
@@ -123,33 +208,13 @@ public class Paint_2D extends JComponent{
         if (Gui.Draw3d == false) {
             Khung2D(g);
         } else {
-            //Khung3D(g);
+            Khung3D(g);
         }
         
-         
+        repaint();
         /////////////////////////////////////////////////////
        
-          if ("star".equals(Gui.selectButton)) {
-                
-//                if(ptemp!=null){
-//                     ptemp.rotate(2);
-//                };         
-//               
-////                Timer timer = new Timer();
-////                timer.scheduleAtFixedRate(new TimerTask() {
-////                @Override
-////                public void run() { 
-////                    if((Gui.paint2D.size()>=0)){
-////                         
-////                    }//                   
-////                    
-////                }
-////              }, 1000, 10000);
-                
-              repaint();   
-              
-              
-            } 
+
     }
     public void Khung2D(Graphics g) {
       
@@ -182,6 +247,69 @@ public class Paint_2D extends JComponent{
             pt.draw(g2);
         });
         coordinates(g2.getGraphicAdapter());
+    }
+    public void Khung3D(Graphics g) {
+        GraphicAdapter g2 = new GraphicAdapter() {
+        };
+        g2.setGraphicAdapter(g);
+
+        Gui.paint3D.forEach((pt) -> {
+            pt.draw(g2);
+        });
+        g.setColor(Color.BLACK);
+        g.drawString("X", 480, changeY(-20));
+        g.drawString("Y", -260, changeY(-280));
+        g.drawString("Z", 20, changeY(270));
+
+       
+
+        MyLine dt1 = new MyLine();
+        MyLine dt2 = new MyLine();
+        MyLine dt3 = new MyLine();
+        if (Gui.paint3D.isEmpty()) {
+            Gui.selectColor = Color.BLACK;
+            dt1.makeLine(0, 0, 0, changeY(290));//oy
+            dt1.draw(g2);
+            dt1.makeLine(0, 0, -250, changeY(-290));//0z
+            dt1.draw(g2);
+            dt1.makeLine(0, 0, 495, 0);//ox
+            dt1.draw(g2);
+        }
+        if (!"".equals(Gui.selectButton)) {
+            if ("Cube".equals(Gui.selectButton)) {
+                Gui.paint3D.clear();
+                Gui.paint3D.removeAll(Gui.paint3D);
+                MyCube obj = new MyCube();
+                obj.makeCube(Gui.X, Gui.Y, Gui.Z);
+                Gui.paint3D.add(obj);
+
+                dt1.makeLine(obj.getDt1().getB().x, obj.getDt1().getB().y, 0, changeY(290));//ox
+                //dt1.draw(g2);
+               // Gui.paint3D.add(dt1);
+                dt2.makeLine(obj.getDt4().getB().x, obj.getDt4().getB().y, -250,changeY(-290));//oz
+                Gui.paint3D.add(dt2);
+                dt2.draw(g2);
+                dt3.makeLine(obj.getDt5().getA().x, obj.getDt5().getA().y, 495, 0);//0y
+                Gui.paint3D.add(dt3);
+            } else if ("Pyramid".equals(Gui.selectButton)) {
+                Gui.paint3D.clear();
+                Gui.paint3D.removeAll(Gui.paint3D);
+                MyPyramid obj = new MyPyramid();
+                obj.makePyramid(Gui.X, Gui.Y, Gui.Z);
+                Gui.paint3D.add(obj);
+
+                dt1.makeLine(obj.getDt12().getB().x, obj.getDt12().getB().y, 0, changeY(290));
+                Gui.paint3D.add(dt1);
+                dt2.makeLine(obj.getDt1().getB().x, obj.getDt1().getB().y, -250, changeY(-290));
+                Gui.paint3D.add(dt2);
+                dt3.makeLine(obj.getDt2().getA().x, obj.getDt2().getA().y, 495, 0);
+                Gui.paint3D.add(dt3);
+            }
+        }
+
+        Gui.selectButton = "";
+        repaint();
+        validate();
     }
     private void coordinates(Graphics g) {
         if (mouseCoords == null) {
