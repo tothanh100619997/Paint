@@ -298,16 +298,16 @@ public class Paint_2D extends JComponent{
                 obj.makePyramid(Gui.X, Gui.Y, Gui.Z);
                 Gui.paint3D.add(obj);
 
-                dt1.makeLine(obj.getDt12().getB().x, obj.getDt12().getB().y, 495, 0);
+                dt1.makeLine(obj.getDt1().getB().x, obj.getDt1().getB().y, 495, 0);
                 Gui.paint3D.add(dt1);
-                dt2.makeLine(obj.getDt1().getB().x, obj.getDt1().getB().y, 0, changeY(290));
+                dt2.makeLine(obj.getDt12().getB().x, obj.getDt12().getB().y, 0, changeY(290));
                 Gui.paint3D.add(dt2);
                 dt3.makeLine(obj.getDt2().getA().x, obj.getDt2().getA().y, -280, changeY(-290));
                 Gui.paint3D.add(dt3);
             }
         }
 
-        Gui.selectButton = "";
+     
         repaint();
         validate();
     }
@@ -330,14 +330,7 @@ public class Paint_2D extends JComponent{
            if(mouseCoords.x>494 && mouseCoords.y>290){                                    // 1 1 494 -290
              g.drawString(" (" + (mouseCoords.x-494) + "," + (mouseCoords.y*-1+290) + ")", mouseCoords.x-494+30, mouseCoords.y-290+30);
             }
-          
-           
-            
-          
-            
-            
-            
-            //g.drawString("x = " + mouseCoords.x + "," + " y = " + mouseCoords.y, 10, 30);
+        
         
     }
     int changeY(int y){

@@ -7,7 +7,6 @@
 package Main;
 
 import java.awt.Point;
-import java.io.BufferedWriter;
 
 /**
  *
@@ -48,25 +47,27 @@ import java.io.BufferedWriter;
 
     public void makePyramid(int x, int y, int z){
         y = y/2;       
-        setDt1(new MyLine(new Point(400,300),new Point(400+x,300))); //ox
-        setDt2(new MyLine(new Point(400-y,300+y),new Point(400,300))); //oy
-        setDt3(new MyLine(new Point(400-y,300+y),new Point(400+x,300))); 
-        setDt4(new MyLine(new Point(400,300),new Point(400-y+x,300+y))); 
-        setDt5(new MyLine(new Point(400-y/2+x/2,300+y/2),new Point(400-y/2+x/2,300+y/2-z))); // cao
-        setDt6(new MyLine(new Point(400,300),new Point(400-y/2+x/2,300+y/2-z))); 
-        setDt7(new MyLine(new Point(400-y/2+x/2,300+y/2-z),new Point(400+x,300))); 
-        setDt8(new MyLine(new Point(400-y/2+x/2,300+y/2-z),new Point(400-y,300+y))); 
-        setDt9(new MyLine(new Point(400-y/2+x/2,300+y/2-z),new Point(400+x-y,300+y))); 
-        setDt10(new MyLine(new Point(400-y,300+y),new Point(400+x-y,300+y))); 
-        setDt11(new MyLine(new Point(400+x,300),new Point(400+x-y,300+y))); 
+        setDt1(new MyLine(new Point(0,0),new Point(x,0))); //ox
+        setDt2(new MyLine(new Point(-y,y),new Point(0,0))); //oy
+        setDt3(new MyLine(new Point(-y,y),new Point(x,0))); 
+        setDt4(new MyLine(new Point(0,0),new Point(-y+x,+y))); 
+        setDt5(new MyLine(new Point(-y/2+x/2,y/2),new Point(-y/2+x/2,y/2-z))); // cao
+        setDt6(new MyLine(new Point(0,0),new Point(-y/2+x/2,y/2-z))); 
+        setDt7(new MyLine(new Point(-y/2+x/2,y/2-z),new Point(x,0))); 
+        setDt8(new MyLine(new Point(-y/2+x/2,y/2-z),new Point(-y,y))); 
+        setDt9(new MyLine(new Point(-y/2+x/2,y/2-z),new Point(x-y,y))); 
+        setDt10(new MyLine(new Point(-y,y),new Point(x-y,y))); 
+        setDt11(new MyLine(new Point(x,0),new Point(x-y,y))); 
   
-        MyLine temp = new MyLine(new Point(400,300),new Point(400,0));
-        if((getDt8().GiaoDiem(temp).y < 300) && (getDt8().GiaoDiem(temp).y > getDt7().GiaoDiem(temp).y))       
-            setDt12(new MyLine(new Point(400,300),getDt8().GiaoDiem(temp))); //oz
-        else if((getDt8().GiaoDiem(temp).y < 300) && (getDt8().GiaoDiem(temp).y < getDt7().GiaoDiem(temp).y))
-            setDt12(new MyLine(new Point(400,300),getDt7().GiaoDiem(temp)));
+        MyLine temp = new MyLine(new Point(0,0),new Point(400,0));
+        if((getDt8().GiaoDiem(temp).y < 0) && (getDt8().GiaoDiem(temp).y > getDt7().GiaoDiem(temp).y))       
+            setDt12(new MyLine(new Point(0,0),getDt8().GiaoDiem(temp))); //oz
+        else if((getDt8().GiaoDiem(temp).y < 0) && (getDt8().GiaoDiem(temp).y < getDt7().GiaoDiem(temp).y))
+            setDt12(new MyLine(new Point(0,0),getDt7().GiaoDiem(temp)));
+            
         else
-            setDt12(new MyLine(new Point(400,300),new Point(400,300)));
+            setDt12(new MyLine(new Point(0,0),new Point(0,0)));
+            
     }
  
     @Override

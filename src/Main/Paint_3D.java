@@ -7,7 +7,7 @@ package Main;
 
 /**
  *
- * @author KHOANGUYEN
+ * @author toth
  */
 
 import static Main.Gui.paint3D;

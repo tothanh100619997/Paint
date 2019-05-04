@@ -65,18 +65,29 @@ public class Gui extends javax.swing.JFrame {
                          row4.setText("Vận Tốc:"+ 990/9+"px/s");
                         }
                         if("ball".equals(selectButton)){
-                            Paint pt = Gui.paint2D.get(0);                     
+                            Paint pt = paint2D.get(0);                     
                             MyEllip p = (MyEllip) pt;
                          row1.setText("Drop Ball ");
                          row2.setText("Tọa độ tâm: "+"("+(p.getA().x+30)+" , "+p.getB().y*(-1)+")");
                          row3.setText("Bán kính: "+30);
                          row4.setText("Vận Tốc:"+ vanToc+"px/s");
                         }
-                        
-                        
-                         
+                     
                     }
-                    
+                    if(paint3D.size()>0){
+                        if("Cube".equals(selectButton)){
+                            
+                              Paint pt = paint3D.get(0);                     
+                              MyCube p = (MyCube) pt;
+                              row1.setText("Khoi Lap Phuong "); 
+                              row2.setText("Tọa độ Tâm: "+"("+0+" , "+0 +" , "+ 0+ ")");
+                              row3.setText("Tọa độ X: "+"("+p.getDt1().getB().x+" , "+0 +" , "+0 + ")");
+                           
+                            row4.setText("Tọa độ Y: "+"("+0+" , "+p.getDt5().getB().y +" , "+ 0+ ")");
+                            row5.setText("Tọa độ Z: "+"("+0+" , "+0 +" , "+ p.getDt4().getB().y*-1+ ")");
+                       
+                        }
+                    }
                  
                 }
               }, 1000, 10);
@@ -383,6 +394,7 @@ public class Gui extends javax.swing.JFrame {
     private void btnCubeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCubeActionPerformed
         // TODO add your handling code here:
         NhapToaDo3D hcn = new NhapToaDo3D("Cube");
+        
     }//GEN-LAST:event_btnCubeActionPerformed
 
     private void btnPyramitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPyramitActionPerformed
