@@ -258,7 +258,7 @@ public class Paint_2D extends JComponent{
         });
         g.setColor(Color.BLACK);
         g.drawString("X", 480, changeY(-20));
-        g.drawString("Y", -260, changeY(-280));
+        g.drawString("Y", -290, changeY(-280));
         g.drawString("Z", 20, changeY(270));
 
        
@@ -268,9 +268,9 @@ public class Paint_2D extends JComponent{
         MyLine dt3 = new MyLine();
         if (Gui.paint3D.isEmpty()) {
             Gui.selectColor = Color.BLACK;
-            dt1.makeLine(0, 0, 0, changeY(290));//oy
+            dt1.makeLine(0, 0, 0, changeY(290));//oz
             dt1.draw(g2);
-            dt1.makeLine(0, 0, -250, changeY(-290));//0z
+            dt1.makeLine(0, 0, -270, changeY(-290));//0y
             dt1.draw(g2);
             dt1.makeLine(0, 0, 495, 0);//ox
             dt1.draw(g2);
@@ -283,13 +283,13 @@ public class Paint_2D extends JComponent{
                 obj.makeCube(Gui.X, Gui.Y, Gui.Z);
                 Gui.paint3D.add(obj);
 
-                dt1.makeLine(obj.getDt1().getB().x, obj.getDt1().getB().y, 0, changeY(290));//ox
-                //dt1.draw(g2);
-               // Gui.paint3D.add(dt1);
-                dt2.makeLine(obj.getDt4().getB().x, obj.getDt4().getB().y, -250,changeY(-290));//oz
+                dt1.makeLine(obj.getDt1().getB().x, obj.getDt1().getB().y, 495, 0);//ox
+                dt1.draw(g2);
+                Gui.paint3D.add(dt1);
+                dt2.makeLine(obj.getDt4().getB().x, obj.getDt4().getB().y, 0,changeY(290));//oz
                 Gui.paint3D.add(dt2);
                 dt2.draw(g2);
-                dt3.makeLine(obj.getDt5().getA().x, obj.getDt5().getA().y, 495, 0);//0y
+                dt3.makeLine(obj.getDt5().getB().x, obj.getDt5().getB().y, -280, changeY(-290));//0y
                 Gui.paint3D.add(dt3);
             } else if ("Pyramid".equals(Gui.selectButton)) {
                 Gui.paint3D.clear();
@@ -298,11 +298,11 @@ public class Paint_2D extends JComponent{
                 obj.makePyramid(Gui.X, Gui.Y, Gui.Z);
                 Gui.paint3D.add(obj);
 
-                dt1.makeLine(obj.getDt12().getB().x, obj.getDt12().getB().y, 0, changeY(290));
+                dt1.makeLine(obj.getDt12().getB().x, obj.getDt12().getB().y, 495, 0);
                 Gui.paint3D.add(dt1);
-                dt2.makeLine(obj.getDt1().getB().x, obj.getDt1().getB().y, -250, changeY(-290));
+                dt2.makeLine(obj.getDt1().getB().x, obj.getDt1().getB().y, 0, changeY(290));
                 Gui.paint3D.add(dt2);
-                dt3.makeLine(obj.getDt2().getA().x, obj.getDt2().getA().y, 495, 0);
+                dt3.makeLine(obj.getDt2().getA().x, obj.getDt2().getA().y, -280, changeY(-290));
                 Gui.paint3D.add(dt3);
             }
         }

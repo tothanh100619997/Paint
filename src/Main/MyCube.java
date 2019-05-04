@@ -51,7 +51,7 @@ public class MyCube implements Hinh3D{
 
     public void makeCube(int x,int y,int z) {
         y = y/2;
-        setDt1(new MyLine(new Point(0,0),new Point(0,x))); //ox
+        setDt1(new MyLine(new Point(0,0),new Point(x,0))); //ox
         setDt2(new MyLine(new Point(0,-z),new Point(x,-z)));//AB        
         setDt3(new MyLine(new Point(x,-z),new Point(x,0)));//BC        
         setDt4(new MyLine(new Point(0,0),new Point(0,-z))); // oz        
