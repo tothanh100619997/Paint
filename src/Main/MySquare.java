@@ -20,7 +20,7 @@ public class MySquare extends MyRect {
         setB(new Point(Math.min(startDrag.x, endDrag.x) + Math.abs(startDrag.x - endDrag.x), Math.min(startDrag.y, endDrag.y)));
         setC(new Point(Math.min(startDrag.x, endDrag.x) + Math.abs(startDrag.x - endDrag.x), Math.min(startDrag.y, endDrag.y) + Math.abs(startDrag.x - endDrag.x)));
         setD(new Point(Math.min(startDrag.x, endDrag.x), Math.min(startDrag.y, endDrag.y) + Math.abs(startDrag.x - endDrag.x)));
-    }
+    }   
 
     @Override
     public void scale(Point startDrag, Point endDrag) {

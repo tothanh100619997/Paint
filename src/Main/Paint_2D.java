@@ -39,7 +39,10 @@ public class Paint_2D extends JComponent{
     private final  Cursor brush;
     private static javax.swing.Timer t; 
     public float angle =20;
-    public int  kc=5;
+    public int  kc=Gui.kc;
+    public int duration = Gui.duration;
+    
+    
     public int _vanToc =0;
     public int _giaToc  = 1;
 
@@ -53,9 +56,11 @@ public class Paint_2D extends JComponent{
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                if("star".equals(Gui.selectButton)){                     
-                            Point a =new Point(-494,changeY(50));
-                            Point b =new Point(-444,changeY(-50));
+                if("star".equals(Gui.selectButton)){    
+                           
+                            int bk = Gui.bk;                            
+                            Point a =new Point(-494,changeY(bk));
+                            Point b =new Point(-494+bk*2,changeY(-bk));
                             MyStar obj = new MyStar();                
                             obj.makeObject(a, b); 
                             Gui.paint2D.add(obj) ;
@@ -69,18 +74,20 @@ public class Paint_2D extends JComponent{
                             Paint pt1 = Gui.paint2D.get(1);
                             ptemp1 =pt1;
                             MyRect hcn = new MyRect();
-                            hcn.makeObject(new Point(-490,changeY(-25)), new Point(490,changeY(-27)));
+                            hcn.makeObject(new Point(-490,changeY(-bk)), new Point(490,changeY(-bk-5)));
                             Gui.paint2D.add(hcn);
 
                             Timer timer = new Timer();
                             timer.scheduleAtFixedRate(new TimerTask() {
                             @Override
+                            @SuppressWarnings("empty-statement")
                             public void run() { 
                                  if("clear".equals(Gui.selectButton)){
                                     timer.cancel();
                                         angle=20;
                                         kc=5;
-                                        Gui.flag =new Point(-469,0);
+                                        Gui.flag=new Point(-494+bk,0);
+                                       
                                 }
                                 if(r.getB().x>495){
                                     angle=-angle;
@@ -97,12 +104,11 @@ public class Paint_2D extends JComponent{
                                  ptemp1.move(new Point(0,0), new Point(kc,changeY(0)));
                                  Gui.flag= new Point((r.getA().x+r.getB().x)/2,0);
 
-
                             };         
 
 
                            }
-                          }, 1000, 50);
+                          }, 2000, duration);
                 }
                 if("ball".equals(Gui.selectButton)){
                     MyEllip ball = new MyEllip();
@@ -155,8 +161,7 @@ public class Paint_2D extends JComponent{
                                 }
                             };         
 
-                          }, 1000, 50);
-
+                          }, 1000, duration);
                 }
                
             }

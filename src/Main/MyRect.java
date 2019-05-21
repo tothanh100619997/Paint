@@ -7,8 +7,7 @@ package Main;
 
 import java.awt.Color;
 import java.awt.Point;
-import java.io.BufferedWriter;
-import java.io.IOException;
+
 
 /**
  *
@@ -34,6 +33,7 @@ public class MyRect implements Hinh2D {
     @Override
     public void makeObject(Point startDrag, Point endDrag) {
         setLineColor(Gui.selectColor);
+        //xác định 4 điểm để vẽ
         setA(new Point(Math.min(startDrag.x, endDrag.x), Math.min(startDrag.y, endDrag.y)));
         setB(new Point(Math.min(startDrag.x, endDrag.x) + Math.abs(startDrag.x - endDrag.x), Math.min(startDrag.y, endDrag.y)));
         setC(new Point(Math.min(startDrag.x, endDrag.x) + Math.abs(startDrag.x - endDrag.x), Math.min(startDrag.y, endDrag.y) + Math.abs(startDrag.y - endDrag.y)));
@@ -142,6 +142,7 @@ public class MyRect implements Hinh2D {
 
     }
 
+    @Override
     public void rotate(float a) {
        // float a = Gui.angleBetween2Lines(startDrag, endDrag);
         Point p1 = getA();

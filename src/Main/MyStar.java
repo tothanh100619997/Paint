@@ -88,6 +88,7 @@ public class MyStar implements Hinh2D {
 
         @Override
 	public void draw(GraphicAdapter g) {
+            
 		MyLine line;
 		if (angle == 0 && flag_Resize == false) {
 			
@@ -97,13 +98,13 @@ public class MyStar implements Hinh2D {
 				B = temp;
 			}
                         
-			int r = (A.x + B.x) / 2 - A.x; // R bán kính
+			int r = (A.y + B.y) / 2 - A.y; // R bán kính
 			int xt = (A.x + B.x) / 2; // xt,yt tọa độ tâm của hình chữ nhật
 			int yt = (A.y + B.y) / 2;
 			float radian = (float) ((72 * Math.PI) / 180); // Đổi độ sang radian
 			float a = radian;
-
-			point[0] = new Point(xt, yt - r);
+                        
+			point[0] = new Point(xt, yt -r);
 
 			for (int i = 1; i < 5; i++) {
 				int x = (int) (point[0].x * Math.cos(a) - point[0].y * Math.sin(a) + yt * Math.sin(a)
@@ -112,8 +113,7 @@ public class MyStar implements Hinh2D {
 						- xt * Math.sin(a));
 				point[i] = new Point(x, y);
 				a += radian;
-			}
-			
+			}		
 
 			
 				line = new MyLine(point[0], point[2]);
@@ -144,7 +144,7 @@ public class MyStar implements Hinh2D {
 				line = new MyLine(point[2], point[4]);
 				
 				line.draw(g);
-			
+                                
 		}
                
 		   

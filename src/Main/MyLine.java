@@ -66,28 +66,23 @@ public class MyLine implements Hinh2D {
 
     @Override
     public void draw(GraphicAdapter g) {
+        
         g.getGraphicAdapter().setColor(getLineColor());
         int Dx, Dy, count;
         float delta_X, delta_Y, i, m, n;
         Dx = this.getB().x - this.getA().x;
         Dy = this.getB().y - this.getA().y;
-        //Lay so buoc ve
-        if (Math.abs(Dy) > Math.abs(Dx)) {
-            //count = Math.abs(Dy)/10;
+        //Tính số điểm ảnh được vẽ trên màn hình
+        // càng nhiều điểm ảnh thì càng mịn
+        if (Math.abs(Dy) > Math.abs(Dx)) {            
             count = Math.abs(Dy);
-        } else {
-            //count = Math.abs(Dx)/10;
+        } else {            
             count = Math.abs(Dx);
         }
 
-        if (count > 0) {
-            /*
-                    delta_X = (int)(Dx/10.0)*10;         
-                    delta_X /= count;               
-                    delta_Y = (int)(Dy/10.0)*10;              
-                    delta_Y /= count;*/
+        if (count > 0) {            
 
-            delta_X = (int) Dx;
+            delta_X = (int) Dx;// làm tròn kết quả để ra tọa độ tiếp theo
             delta_X /= count;
             delta_Y = (int) Dy;
             delta_Y /= count;
@@ -95,8 +90,8 @@ public class MyLine implements Hinh2D {
             m = this.getA().x;
             n = this.getA().y;
             do {
-                //g.fillRect((int)(m/10.0)*10-3, (int)(n/10.0)*10-3, 7, 7);
-                g.getGraphicAdapter().fillRect((int) m, (int) n, 1, 1);
+                
+                g.getGraphicAdapter().fillRect((int) m, (int) n, 5, 5);
                 m += delta_X;
                 n += delta_Y;
                 --count;

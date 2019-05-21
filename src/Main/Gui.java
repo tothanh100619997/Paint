@@ -30,9 +30,11 @@ public class Gui extends javax.swing.JFrame {
      public static int Y;
      public static int Z;
      public static float vanToc =0;
-     public static  Point flag = new Point(-469,0);
+     public static  int bk = 50;
+     public static  Point flag = new Point(-494+bk,0);
      public javax.swing.JPanel pnlInfomation;
-
+     public  static int kc=5;
+     public  static int duration=40;
     /**
      * Creates new form Gui
      */
@@ -55,22 +57,26 @@ public class Gui extends javax.swing.JFrame {
                 public void run() {  
                   
                     if(paint2D.size()>0){
-                        
+                        float vt = (float) (kc/(duration*0.001));
                         if("star".equals(selectButton)){
                         Paint pt = paint2D.get(0);
                         MyStar r = (MyStar) pt;
                          row1.setText("Rolling Ball Star");
                          row2.setText("Tọa độ tâm: "+"("+(r.getA().x+r.getB().x)*0.5+" , "+(r.getA().y+r.getB().y)*0.5 +")");
-                         row3.setText("Bán kính: "+r.getB().y*0.5);
-                         row4.setText("Vận Tốc:"+ 990/9+"px/s");
+                         row3.setText("Bán kính: "+bk);
+                         row4.setText("Vận Tốc:"+ vt+"px/s");
                         }
                         if("ball".equals(selectButton)){
                             Paint pt = paint2D.get(0);                     
                             MyEllip p = (MyEllip) pt;
+                            float tVantoc = vanToc;
+                            if(tVantoc<0) tVantoc=-tVantoc;
+                            tVantoc = (float) (tVantoc/(duration*0.001));
+                        
                          row1.setText("Drop Ball ");
                          row2.setText("Tọa độ tâm: "+"("+(p.getA().x+30)+" , "+p.getB().y*(-1)+")");
-                         row3.setText("Bán kính: "+30);
-                         row4.setText("Vận Tốc:"+ vanToc+"px/s");
+                         row3.setText("Bán kính: "+(p.getA().y-p.getC().y)/-2);
+                         row4.setText("Vận Tốc:"+tVantoc+"px/s");
                         }
                      
                     }
@@ -103,7 +109,7 @@ public class Gui extends javax.swing.JFrame {
                     }
                  
                 }
-              }, 1000, 10);
+              }, 1000, 50);
              
        
     }
@@ -139,7 +145,7 @@ public class Gui extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Ki Thuat Do Hoa");
+        setTitle("Vẽ hình cơ bản");
         setPreferredSize(new java.awt.Dimension(1230, 730));
         setSize(new java.awt.Dimension(1230, 730));
 
@@ -494,16 +500,16 @@ public class Gui extends javax.swing.JFrame {
         Point p2 = new Point(xc - x, yc + y);
         Point p3 = new Point(xc - x, yc - y);
         Point p4 = new Point(xc + x, yc - y);
-        
+       
         p1 = rotateAround(p1, a);
         p2 = rotateAround(p2, a);
         p3 = rotateAround(p3, a);
         p4 = rotateAround(p4, a);
         
-        g.fillRect(p1.x, p1.y, 1, 1);
-        g.fillRect(p2.x, p2.y, 1, 1);
-        g.fillRect(p3.x, p3.y, 1, 1);
-        g.fillRect(p4.x, p4.y, 1, 1);
+        g.fillRect(p1.x, p1.y, 5, 5);
+        g.fillRect(p2.x, p2.y, 5, 5);
+        g.fillRect(p3.x, p3.y, 5, 5);
+        g.fillRect(p4.x, p4.y, 5, 5);
     }
   public static double areaTriangle(Point A, Point B, Point C) {
 		return Math.abs(A.x * (B.y - C.y) + B.x * (C.y - A.y) + C.x * (A.y - B.y));

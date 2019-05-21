@@ -16,10 +16,10 @@ public class MyCircle extends MyEllip {
     @Override
     public void makeObject(Point startDrag, Point endDrag) {
         setLineColor(Gui.selectColor);
-        setA(new Point(startDrag.x , startDrag.y/2));
-        setB(new Point(startDrag.x +endDrag.y,startDrag.y/2));
-        setC(new Point(startDrag.x +endDrag.y, endDrag.y/2));
-        setD(new Point(startDrag.x ,  endDrag.y/2));
+        setA(new Point(startDrag.x , startDrag.y));
+        setB(new Point(startDrag.x +endDrag.y+endDrag.y,startDrag.y));
+        setC(new Point(startDrag.x +endDrag.y+endDrag.y, endDrag.y));
+        setD(new Point(startDrag.x ,  endDrag.y));
         
     }
 
