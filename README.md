@@ -1,41 +1,31 @@
-# Project Paint(Ki thuat do hoa Co Thao)
+# Vẽ hình cơ bản
 
-## Getting Started
+## Mô tả 
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+Đây là đồ án kết thúc môn học đồ án môn kĩ thuật đồ họa.
 
-### Prerequisites
-
-What things you need to install the software and how to install them
+### Công nghệ
 
 ```
 Language : Java
 IDE      : NetBeans 8.2
+Graphic  :graphic 
 
 ```
 
-### Installing
+### Các chức năng
 
-A step by step series of examples that tell you how to get a development env running
+* Vẽ bánh xe hình ngôi sao lăng trên đường
+* Vẽ quả bóng chuyển động rơi tự do xuống bàn chậm dần đều
+* Vẽ hình hợp chữ nhật
+* Vẽ hình chớp
 
-Say what the step will be
-
-```
-Install
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
+### Demo
+  ![alt text](https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500)
 
 ## Authors
 
-* **TO Nguyen** - *Mobile Developper* - [tothanh100619997](https://github.com/tothanh100619997)
+* **To Nguyen** - *Mobile Developper* - [tothanh100619997](https://github.com/tothanh100619997)
 
 
 
