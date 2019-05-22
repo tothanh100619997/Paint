@@ -2,7 +2,7 @@
 
 ## Mô tả 
 
-Đây là đồ án kết thúc môn học đồ án môn kĩ thuật đồ họa.
+Đây là đồ án kết thúc môn học kĩ thuật đồ họa.
 
 ### Công nghệ
 
