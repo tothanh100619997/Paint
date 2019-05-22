@@ -44,13 +44,13 @@ public class Gui extends javax.swing.JFrame {
         setSize(1230,730);
         setResizable(false);
         setIconImage(new ImageIcon("Image/draw.png").getImage());
-        //panel content
+        //panel content//
         pnlContent.setLayout(new BorderLayout(0, 0));
         pnlContent.setBackground(Color.white);
         setContentPane(pnlContent);
-        //paint
+        //paint//
         pnlOxy.add(new Paint_2D(),BorderLayout.CENTER);
-        
+        //show thong tin//
         Timer timer = new Timer();
                 timer.scheduleAtFixedRate(new TimerTask() {
                 @Override
@@ -483,15 +483,13 @@ public class Gui extends javax.swing.JFrame {
     private javax.swing.JLabel row5;
     // End of variables declaration//GEN-END:variables
 
-
+    //phép quay
     public static Point rotateAround(Point p, float angle) {
         Point p2 = new Point();
-
         AffineTransform rotation = new AffineTransform();
         double angleInRadians = (angle * Math.PI / 180);
         rotation.rotate(angleInRadians, flag.x,flag.y );
         rotation.transform(p, p2);
-
         return p2;
     }
 
@@ -500,12 +498,12 @@ public class Gui extends javax.swing.JFrame {
         Point p2 = new Point(xc - x, yc + y);
         Point p3 = new Point(xc - x, yc - y);
         Point p4 = new Point(xc + x, yc - y);
-       
+       //vẽ đều ra hai bên
         p1 = rotateAround(p1, a);
         p2 = rotateAround(p2, a);
         p3 = rotateAround(p3, a);
         p4 = rotateAround(p4, a);
-        
+       // put pixel
         g.fillRect(p1.x, p1.y, 5, 5);
         g.fillRect(p2.x, p2.y, 5, 5);
         g.fillRect(p3.x, p3.y, 5, 5);

@@ -38,7 +38,7 @@ public class Paint_2D extends JComponent{
     private  Point mouseCoords = null;
     private final  Cursor brush;
     private static javax.swing.Timer t; 
-    public float angle =20;
+    public float angle =12;
     public int  kc=Gui.kc;
     public int duration = Gui.duration;
     
@@ -193,8 +193,6 @@ public class Paint_2D extends JComponent{
         });
         
         
-        //setBackground(Color.RED);
-        //setVisible(true);
     }
     
     @Override
@@ -209,7 +207,7 @@ public class Paint_2D extends JComponent{
          GraphicAdapter g2 = new GraphicAdapter() {
         };
         g2.setGraphicAdapter(g);
-         Point p1, p2, p3, p4;
+         
         if (Gui.Draw3d == false) {
             Khung2D(g);
         } else {
@@ -238,12 +236,13 @@ public class Paint_2D extends JComponent{
         }
         
         g.setColor(Color.BLACK);
-        g.drawLine(0, 290, 0, -290);//560 0 560 800
+        g.drawLine(0, 290, 0, -290);
         g.drawLine(-494, 0, 494, 0);
         g.drawString("X", 485, 20);
         g.drawString("Y", -20, -275);
         g.drawString("O", -20, 20);
-       // g.drawString("20", 520, 310);//570 320
+      
+       //vẽ ô pixel
         for (int i = 0, a = -500, b= 300; i < 60; i++, a += 20,b-=20) {//60
             g.drawLine(a, 3, a, -3);
             g.drawLine(3, b, -3, b);
@@ -316,6 +315,7 @@ public class Paint_2D extends JComponent{
         repaint();
         validate();
     }
+    // lấy tọa độ màn hình//
     private void coordinates(Graphics g) {
         if (mouseCoords == null) {
             return;

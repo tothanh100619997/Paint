@@ -152,42 +152,44 @@ public class MyEllip implements Hinh2D {
 
     @Override
     public void draw(GraphicAdapter g) {
-        float rxSq = this.getDx() * this.getDx();
-        float rySq = this.getDy() * this.getDy();
+        float rxSq = this.getDx() * this.getDx();//a^2
+        float rySq = this.getDy() * this.getDy();//b^2
         float x1 = 0, y1 = this.getDy(), p;
-        float px = 0, py = 2 * rxSq * y1;
+        float px = 0, py = 2 * rxSq * y1;//2a^2y
         g.getGraphicAdapter().setColor(this.getLineColor());
         Point p1 = new Point(Gui.rotateAround(this.getO(), this.getAngle()*(-1)));
               
         Gui.Ve4Diem(g.getGraphicAdapter(), p1.x, p1.y, (int)x1, (int)y1, this.getAngle());
         
         //Region 1
-        p = rySq - (rxSq * this.getDy()) + (float) (0.25 * rxSq);
+        p = rySq - (rxSq * this.getDy()) + (float) (0.25 * rxSq);// p=b2 -a2b + a2/4
 
         while (px < py) {
             x1++;
-            px = px + 2 * rySq;
+            px = px + 2 * rySq;//xi+1=  xi+  1  hoặc xi+1=  xivà  yi+1=  yihoặc yi+1 =  yi–1 suy ra đạo hàm riêng phần sẽ được cập nhật thêm 2b2cho fx hoặc 2a2cho fy.
             if (p < 0) {
-                p = p + rySq + px;
+                p = p + rySq*(2*x1+3);//y=y
             } else {
                 y1--;
-                py = py - 2 * rxSq;
-                p = p + rySq + px - py;
+                py = py - 2 * rxSq;                
+                p+= rySq*(2*x1 +3) + rxSq*(-2*y1 +2); // y=y-1
             }
+            
             Gui.Ve4Diem(g.getGraphicAdapter(), p1.x, p1.y, (int)x1, (int)y1, this.getAngle());
         }
         
         //Region 2
-        p = (float) (rySq * (x1 + 0.5) * (x1 + 0.5) + rxSq * (y1 - 1) * (y1 - 1) - rxSq * rySq);
+        p = (float) (rySq * (x1 + 0.5) * (x1 + 0.5) + rxSq * (y1 - 1) * (y1 - 1) - rxSq * rySq);//b2(x+1/2)2+a2(y-1)2 - a2b2
         while (y1 > 0) {
             y1--;
             py = py - 2 * rxSq;
-            if (p > 0) {
-                p = p + rxSq - py;
+            if (p >= 0) {                
+                p+=rxSq*(3 - 2*y1); //p =p + a2(3-2y);
             } else {
                 x1++;
                 px = px + 2 * rySq;
-                p = p + rxSq - py + px;
+              
+               p += rySq*(2*x1+2) + rxSq*(-2*y1 +3); //p=p + b2(2x +2) +a2(-2y +3)
             }
             Gui.Ve4Diem(g.getGraphicAdapter(), p1.x, p1.y, (int)x1, (int)y1, this.getAngle());
         }

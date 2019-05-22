@@ -30,7 +30,7 @@ public class MyLine implements Hinh2D {
     }
 
     @Override
-    public void makeObject(Point startDrag, Point endDrag) {
+    public void makeObject(Point startDrag, Point endDrag) {// Truyền điểm đầu và điểm cuối//
         setLineColor(Gui.selectColor);
         this.setA(new Point(startDrag.x, startDrag.y));
         this.setB(new Point(endDrag.x, endDrag.y));
@@ -43,7 +43,7 @@ public class MyLine implements Hinh2D {
     }
 
     @Override
-    public boolean contains(Point p) {
+    public boolean contains(Point p) {// có chứa đoạn thẳng hay không//
         Line l1 = new Line(this.getA().x, this.getA().y, this.getB().x, this.getB().y);
         Line l2 = new Line(this.getA().x -1, this.getA().y -1, this.getB().x+1, this.getB().y+1);
         Line l3 = new Line(this.getA().x -2, this.getA().y -2, this.getB().x+2, this.getB().y+2);
@@ -53,27 +53,27 @@ public class MyLine implements Hinh2D {
     }
 
     @Override
-    public void move(Point startDrag, Point endDrag) {
+    public void move(Point startDrag, Point endDrag) {// dy chuyển đoạn thẳng//
         this.setA(new Point(this.getA().x + (endDrag.x - startDrag.x), this.getA().y + (endDrag.y - startDrag.y)));
         this.setB(new Point(this.getB().x + (endDrag.x - startDrag.x), this.getB().y + (endDrag.y - startDrag.y)));
     }
 
     @Override
-    public void scale(Point startDrag, Point endDrag) {
+    public void scale(Point startDrag, Point endDrag) {// resize đoạn thẳng phóng to thu nhỏ//
         this.setA(new Point(this.getA().x, this.getA().y));
         this.setB(new Point(endDrag.x, endDrag.y));
     }
 
     @Override
     public void draw(GraphicAdapter g) {
-        
+        //thuật toán DDA//
         g.getGraphicAdapter().setColor(getLineColor());
         int Dx, Dy, count;
         float delta_X, delta_Y, i, m, n;
         Dx = this.getB().x - this.getA().x;
         Dy = this.getB().y - this.getA().y;
-        //Tính số điểm ảnh được vẽ trên màn hình
-        // càng nhiều điểm ảnh thì càng mịn
+        //Tính số điểm ảnh được vẽ trên màn hình//
+        // càng nhiều điểm ảnh thì càng mịn//
         if (Math.abs(Dy) > Math.abs(Dx)) {            
             count = Math.abs(Dy);
         } else {            
@@ -176,6 +176,7 @@ public class MyLine implements Hinh2D {
             n = y1;
 
             do {
+                // putpixel
                 if (dem < 7) {
                     g.setColor(Color.BLACK);
                 } else {
