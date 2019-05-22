@@ -3,7 +3,11 @@
 ## Mô tả 
 
 Đây là đồ án kết thúc môn học kĩ thuật đồ họa.
-
+### Thuật toán
+* DDA để vẽ đường thẳng
+* midPoint để vẽ Elip
+* Gia tốc trọng trường để làm quả bóng rơi
+* Cabinet để vẽ 3D
 ### Công nghệ
 
 ```
