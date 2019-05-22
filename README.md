@@ -30,9 +30,7 @@ Graphic  :graphic
   ![alt text](https://i.imgur.com/xvvUuS0.png)
   ![alt text](https://i.imgur.com/s1tgdSL.png)
 
-## Authors
 
-* **To Nguyen** - *Mobile Developper* - [tothanh100619997](https://github.com/tothanh100619997)
 
 
 
