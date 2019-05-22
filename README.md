@@ -20,8 +20,8 @@ Graphic  :graphic
 ### Các chức năng
 
 * Vẽ bánh xe hình ngôi sao lăng trên đường
-* Vẽ quả bóng chuyển động rơi tự do xuống bàn chậm dần đều
-* Vẽ hình hợp chữ nhật
+* Vẽ quả bóng chuyển động rơi tự do xuống bàn chậm dần rồi dừng hẳng
+* Vẽ hình hộp chữ nhật
 * Vẽ hình chớp
 
 ### Demo
